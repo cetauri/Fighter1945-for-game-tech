@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-
+#import "Enemy.h"
 @class BattleFieldLayer;
 
 @interface Fighter : CCSprite {    
@@ -21,6 +21,7 @@
 
 // 전투기 이동에 따라서 백그라운드 스크롤
 +(id)fighterWithBackground:(BattleFieldLayer *)bgLayer;
+-(BOOL)isCollide:(CCNode *)node onlyContains:(BOOL)contains;
 
 @property float direction, speed;
 @property (assign) BattleFieldLayer *battleField;

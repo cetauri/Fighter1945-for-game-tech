@@ -27,6 +27,7 @@
 		AFABC859177C1B1A00317F9A /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AFABC858177C1B1A00317F9A /* FacebookSDKResources.bundle */; };
 		AFABC85B177C1B3800317F9A /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AFABC85A177C1B3800317F9A /* FBUserSettingsViewResources.bundle */; };
 		AFABC85D177C1B5700317F9A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AFABC85C177C1B5700317F9A /* libsqlite3.dylib */; };
+		AFF30C6617828F4D003CADD7 /* StageEndLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF30C6417828F4D003CADD7 /* StageEndLayer.m */; };
 		F71D959A13A7048C00BB6E1F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71D959913A7048C00BB6E1F /* QuartzCore.framework */; };
 		F71D959C13A7048C00BB6E1F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71D959B13A7048C00BB6E1F /* OpenGLES.framework */; };
 		F71D959E13A7048C00BB6E1F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71D959D13A7048C00BB6E1F /* OpenAL.framework */; };
@@ -186,6 +187,8 @@
 		AFABC858177C1B1A00317F9A /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		AFABC85A177C1B3800317F9A /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = ../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		AFABC85C177C1B5700317F9A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		AFF30C6417828F4D003CADD7 /* StageEndLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageEndLayer.m; sourceTree = "<group>"; };
+		AFF30C6517828F4D003CADD7 /* StageEndLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageEndLayer.h; sourceTree = "<group>"; };
 		F71D959513A7048C00BB6E1F /* Fighter1945.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fighter1945.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F71D959913A7048C00BB6E1F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F71D959B13A7048C00BB6E1F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -518,6 +521,8 @@
 		F71D95A913A7048C00BB6E1F /* Fighter1945 */ = {
 			isa = PBXGroup;
 			children = (
+				AFF30C6417828F4D003CADD7 /* StageEndLayer.m */,
+				AFF30C6517828F4D003CADD7 /* StageEndLayer.h */,
 				F71D972813A7076C00BB6E1F /* Fighter.h */,
 				F71D972913A7076C00BB6E1F /* Fighter.m */,
 				F79A39FD13A74A96007D0A95 /* Enemy.h */,
@@ -1092,6 +1097,7 @@
 				2C5CB22113A96C4200C97BFB /* BattleFieldScene.m in Sources */,
 				2C5CB22513A9700F00C97BFB /* StageClearLayer.m in Sources */,
 				2CC955D113B003640004B4DD /* HUDLayer.m in Sources */,
+				AFF30C6617828F4D003CADD7 /* StageEndLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

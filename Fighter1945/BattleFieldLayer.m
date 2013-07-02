@@ -3,7 +3,7 @@
 #import "SimpleAudioEngine.h"
 #import "Fighter.h"
 #import "Enemy.h"
-
+#import "StageEndLayer.h"
 
 #define Z_BG 0
 #define Z_FIGHT 90
@@ -12,7 +12,6 @@
 
 #define TAG_ENEMY 1
 #define TAG_BULLET 2
-
 @implementation BattleFieldLayer
 
 @synthesize fighter;
@@ -78,6 +77,21 @@
 			[bullets removeObject:bullet];
 		}		
 	}
+    
+    for(Enemy *e in enemies){
+        if ([fighter isCollide:e onlyContains:NO]) {
+            [self finishGame:YES];
+        }
+    }
+    
+
+}
+
+-(void)finishGame:(BOOL)isWin{
+    [self stopAllActions];
+    CCScene *nextScene = [StageEndLayer sceneWithResult:isWin];
+    CCTransitionCrossFade *tran = [CCTransitionCrossFade transitionWithDuration:0.3 scene:nextScene];
+    [[CCDirector sharedDirector] replaceScene:tran];
 }
 
 // 총알 추가

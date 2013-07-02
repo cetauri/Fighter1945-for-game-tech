@@ -43,5 +43,22 @@
 	}
 		
 }
-
+// 충돌 체크 - 일부 겹치는 것과 완전히 포함 관계를 체크 - 단 anchorPoint=(0.5,0.5)
+-(BOOL)isCollide:(CCNode *)node onlyContains:(BOOL)contains {
+	CGRect rectSelf;
+	rectSelf.origin = ccpAdd(self.position, ccpMult(ccpFromSize(self.contentSize), -0.5));
+	rectSelf.size = self.contentSize;
+	
+	CGRect rectOther;
+	rectOther.origin = ccpAdd(node.position, ccpMult(ccpFromSize(node.contentSize), -0.5));
+	rectOther.size = node.contentSize;
+	
+	if ( contains )
+		return CGRectContainsRect(rectSelf, rectOther); // 포함될때만..
+	else {
+		// 두 스프라이트 간의 거리가 너비,높이의 70% 정도 이내일 때
+		CGFloat dist = ccpDistance(self.position, node.position);
+		return ( dist < ( self.contentSize.width * 0.7 ) || dist < ( self.contentSize.height * 0.7 ) );
+	}
+}
 @end
