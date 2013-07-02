@@ -42,16 +42,8 @@
 }
 - (void) applicationDidFinishLaunching:(UIApplication*)application
 {
-//    [Baasio setApplicationInfo:@"cetauri" applicationName:@"sandbox"];
-//    [BaasioUser signInBackground:@"cetauri2"
-//                        password:@"cetauri"
-//                    successBlock:^(void){
-//                        NSLog(@"successBlock");
-//                    }
-//                    failureBlock:^(NSError *e){
-//                        NSLog(@"failureBlock : %@", e.localizedDescription);
-//                    }];
-//    
+    [Baasio setApplicationInfo:@"cetauri" applicationName:@"flight1945"];
+
     
 	// Init the window
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -183,7 +175,14 @@
         case FBSessionStateOpen:
             if (!error) {
                 // We have a valid session
-                NSLog(@"session : %@", session.accessToken);
+                NSLog(@"session : %@", session.accessTokenData.accessToken);
+                [BaasioUser signInViaFacebookInBackground:session.accessTokenData.accessToken
+                                             successBlock:^(void){
+                                                 NSLog(@"login success.");
+                                             }
+                                             failureBlock:^(NSError *e){
+                                                 NSLog(@"login fail : %@", e.localizedDescription);
+                                             }];
             }
             break;
         case FBSessionStateClosed:
@@ -208,8 +207,10 @@
 
 - (void)openSession:(BOOL)allowLoginUI
 {
-    [FBSession openActiveSessionWithReadPermissions:nil
-                                       allowLoginUI:YES
+    NSArray *permissions = [[NSArray alloc] initWithObjects:@"email", nil];
+
+    [FBSession openActiveSessionWithReadPermissions:permissions
+                                       allowLoginUI:allowLoginUI
                                   completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
                                       [self sessionStateChanged:session state:state error:error];
                                   }];

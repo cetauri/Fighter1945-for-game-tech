@@ -29,6 +29,7 @@
 	CCLayerColor *backgroundLayer;
 	CCParallaxNode *voidNode;	
 	CGPoint backgroundNodeOffset;
+    int score;
 }
 
 +(CCScene *) scene;

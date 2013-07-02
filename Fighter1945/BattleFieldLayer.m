@@ -4,6 +4,7 @@
 #import "Fighter.h"
 #import "Enemy.h"
 #import "StageEndLayer.h"
+#import <baas.io/Baas.h>
 
 #define Z_BG 0
 #define Z_FIGHT 90
@@ -12,6 +13,8 @@
 
 #define TAG_ENEMY 1
 #define TAG_BULLET 2
+#define TAG_FIGHTER 3
+
 @implementation BattleFieldLayer
 
 @synthesize fighter;
@@ -28,6 +31,28 @@
 	if ( sprite.tag == TAG_ENEMY ) {
 		[enemies removeObject:sprite];
 	}
+    else if(sprite.tag == TAG_FIGHTER){
+        [enemies removeObject:sprite];
+        
+        
+        [self stopAllActions];
+        CCScene *nextScene = [StageEndLayer sceneWithResult:NO];
+        CCTransitionCrossFade *tran = [CCTransitionCrossFade transitionWithDuration:0.3 scene:nextScene];
+        [[CCDirector sharedDirector] replaceScene:tran];
+        
+        NSLog(@"score : %i", score);
+        
+        BaasioEntity *scoreEntity = [BaasioEntity entitytWithName:@"scores"];
+        [scoreEntity setObject:[NSNumber numberWithInt:score] forKey:@"scores"];
+        
+        [scoreEntity setObject:[BaasioUser currentUser].username forKey:@"name"];
+        [scoreEntity saveInBackground:^(BaasioEntity *entity){
+                        NSLog(@"success : %@", entity.description);
+                    }
+                    failureBlock:^(NSError *error){
+                        NSLog(@"error : %@", error.localizedDescription);
+                    }];
+    }
 	else {
 		[bullets removeObject:sprite];
 	}
@@ -66,6 +91,7 @@
 		if ( [fallingEnemies count] > 0 ) {
 			for (Enemy *enemy in fallingEnemies) {
 				[enemy explode:explosionAni];
+                score++;
 			}
 		}
 	}
@@ -80,7 +106,7 @@
     
     for(Enemy *e in enemies){
         if ([fighter isCollide:e onlyContains:NO]) {
-            [self finishGame:YES];
+            [self finishGame:NO];
         }
     }
     
@@ -88,10 +114,8 @@
 }
 
 -(void)finishGame:(BOOL)isWin{
-    [self stopAllActions];
-    CCScene *nextScene = [StageEndLayer sceneWithResult:isWin];
-    CCTransitionCrossFade *tran = [CCTransitionCrossFade transitionWithDuration:0.3 scene:nextScene];
-    [[CCDirector sharedDirector] replaceScene:tran];
+    [fighter explode:explosionAni];
+    
 }
 
 // 총알 추가
@@ -204,11 +228,13 @@
 
 // http://www.cocos2d-iphone.org/forum/topic/3414
 -(id) init {
-	if( (self=[super initWithColor:ccc4(8, 54, 129, 255)])) {	
+	if( (self=[super initWithColor:ccc4(8, 54, 129, 255)])) {
+        score = 0;
 		CGSize winsize = [[CCDirector sharedDirector] winSize];
 		
 		self.fighter = [Fighter fighterWithBackground:self];
 		fighter.position = ccp(winsize.width /2 , winsize.height/4);
+        fighter.tag = TAG_FIGHTER;
 		[self addChild:fighter z:Z_FIGHT];		
 		
 		[self initSimpleBackground];

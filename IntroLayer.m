@@ -20,7 +20,8 @@
 }
 
 -(void)facebook {
-    
+    [[FBSession activeSession] closeAndClearTokenInformation];
+
     NSLog(@"facebook");
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate openSession:YES];

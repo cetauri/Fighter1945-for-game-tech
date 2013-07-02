@@ -8,6 +8,7 @@
 
 #import "Fighter.h"
 #import "BattleFieldLayer.h"
+#import "SimpleAudioEngine.h"
 
 
 @implementation Fighter
@@ -60,5 +61,14 @@
 		CGFloat dist = ccpDistance(self.position, node.position);
 		return ( dist < ( self.contentSize.width * 0.7 ) || dist < ( self.contentSize.height * 0.7 ) );
 	}
+}
+
+-(void)explode:(CCAnimation *)explosionAni {
+//	[self stopAllActions];
+	
+	id explosionAction = [CCAnimate actionWithAnimation:explosionAni];
+	id removeAction = [CCCallFuncN actionWithTarget:battleField selector:@selector(spriteMoveFinished:)];
+	[self runAction:[CCSequence actions:explosionAction, removeAction, nil]];
+	[[SimpleAudioEngine sharedEngine] playEffect:@"explosion.aif"];
 }
 @end

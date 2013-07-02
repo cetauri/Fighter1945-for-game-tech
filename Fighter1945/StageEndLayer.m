@@ -61,7 +61,7 @@
 		menu.position = ccp(winsize.width/2, winsize.height*0.3);
 		
 		[self addChild:menu];
-
+        
 	}
 	
 	return self;
