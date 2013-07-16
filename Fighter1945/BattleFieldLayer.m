@@ -45,7 +45,7 @@
         BaasioEntity *scoreEntity = [BaasioEntity entitytWithName:@"scores"];
         [scoreEntity setObject:[NSNumber numberWithInt:score] forKey:@"scores"];
         
-        [scoreEntity setObject:[BaasioUser currentUser].username forKey:@"name"];
+        [scoreEntity setObject:[BaasioUser currentUser].username forKey:@"username"];
         [scoreEntity saveInBackground:^(BaasioEntity *entity){
                         NSLog(@"success : %@", entity.description);
                     }

@@ -42,7 +42,7 @@
 }
 - (void) applicationDidFinishLaunching:(UIApplication*)application
 {
-    [Baasio setApplicationInfo:@"cetauri" applicationName:@"flight1945"];
+    [Baasio setApplicationInfo:@"7892172f-e3b2-11e2-bd5f-06fd000000c2" applicationName:@"c200eb6b-e3b2-11e2-ad8a-06f4fe0000b5"];
 
     
 	// Init the window
